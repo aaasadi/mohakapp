@@ -68,11 +68,11 @@ export default {
 
 <template>
   <div class="box">
-    <div class="separator" :style="`left: calc(5% - 12px); width: 25px`">
+    <div class="separator" :style="`left: calc(5% - 25px); width: 50px`">
       <div id="regular"></div>
       5 %
     </div>
-    <div class="separator" :style="`left: calc(95% - 18px); width: 36px`">
+    <div class="separator" :style="`left: calc(95% - 25px); width: 50px`">
       <div id="regular"></div>
       95 %
     </div>

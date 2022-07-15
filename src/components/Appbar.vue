@@ -6,9 +6,7 @@ export default {
 
 <template>
   <v-app-bar color="primary" dark app>
-    <v-btn icon>
-      <v-icon>mdi-arrow-right</v-icon>
-    </v-btn>
-    <v-toolbar-title>نمودار رشد</v-toolbar-title>
+    <v-icon class="ml-3">mdi-chart-line</v-icon>
+    <v-toolbar-title>نمودار رشد کودکان</v-toolbar-title>
   </v-app-bar>
 </template>

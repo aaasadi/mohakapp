@@ -1,5 +1,5 @@
 <template>
-  <v-app>
+  <v-app class="app">
     <Appbar />
 
     <v-main class="layout">
@@ -9,6 +9,7 @@
 </template>
 
 <script>
+import "./assets/fonts/iransans/css/fontiran.css";
 import HomePage from "./pages/home.vue";
 import Appbar from "./components/Appbar.vue";
 
@@ -30,5 +31,8 @@ export default {
 .layout {
   display: flex;
   align-items: center;
+}
+.app {
+  font-family: "IRANSans";
 }
 </style>

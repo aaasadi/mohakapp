@@ -4,13 +4,13 @@ export default {
   name: "FormBox",
   props: ["setData"],
   data: () => ({
-    weight: 22,
-    height: 105,
+    weight: null,
+    height: null,
     BMI: null,
     gender: "boy",
-    year: 1400,
-    month: 8,
-    day: 24,
+    year: null,
+    month: null,
+    day: null,
   }),
   computed: {},
   methods: {
@@ -40,13 +40,13 @@ export default {
 </script>
 
 <template>
-  <div>
-    <v-img src="../assets/img.webp" />
+  <div class="box">
+    <v-img src="../assets/img.webp" class="image-rounded" />
     <form @submit.prevent="submit">
-      <v-row class="mb-3" no-gutters align="center">
+      <v-row class="my-3" no-gutters align="center">
         <label>جنسیت</label>
         <v-spacer />
-        <v-radio-group v-model="gender" hide-details>
+        <v-radio-group class="mt-0" v-model="gender" hide-details>
           <v-row align="center" no-gutters>
             <v-radio value="boy" label="پسر" class="mb-0 ml-5" />
             <v-radio value="girl" label="دختر" />
@@ -108,12 +108,20 @@ export default {
         />
       </v-row>
 
-      <v-btn type="submit" color="primary" block> محاسبه منحنی رشد </v-btn>
+      <v-btn type="submit" color="primary" height="56" class="button" block>
+        محاسبه منحنی رشد
+      </v-btn>
     </form>
   </div>
 </template>
 
 <style lang="scss" scoped>
+.box {
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0px 0px 25px rgb(0 0 0 / 10%);
+  border-radius: 1rem;
+}
 .dateField {
   direction: ltr;
   &::v-deep() input::-webkit-outer-spin-button,
@@ -128,5 +136,11 @@ export default {
 }
 .ltr {
   direction: ltr;
+}
+.button {
+  letter-spacing: normal;
+}
+.image-rounded {
+  border-radius: 16px;
 }
 </style>
