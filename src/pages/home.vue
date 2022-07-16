@@ -40,8 +40,8 @@ export default {
             <span v-if="age > 0">{{ age }} سال</span>
             <span v-if="age > 0 && month > 0"> و</span>
             <span v-if="month > 0">{{ month }} ماه</span>
-            می باشد و BMI ایشان
-            {{ data.bmi }} است
+            و BMI ایشان
+            {{ data.bmi }} می‌باشد
           </p>
 
           <HorizontalChartView :data="data" />

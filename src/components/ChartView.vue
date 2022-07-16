@@ -74,12 +74,25 @@ export default {
             display: false,
           },
         },
+        borderWidth: 2,
+        pointStyle: "cross",
+        pointBorderWidth: 0.01,
+        tension: 0.2,
         responsive: true,
         maintainAspectRatio: false,
       },
     };
   },
   computed: {
+    title() {
+      const { month } = this.data;
+      let range;
+      if (month < 24) range = "زیر دو سال";
+      else if (month < 60) range = "دو تا پنج سال";
+      else if (month < 228) range = "پنج تا نوزده سال";
+
+      return `نمودار رشد فرزندان ${range}`;
+    },
     colors() {
       return {
         black: "#636e72",
@@ -92,18 +105,26 @@ export default {
     arrayOfMonth() {
       const { month } = this.data;
       const array = [];
-      let floor = Math.floor(month / 12);
-      for (let i = 0; i < 12; i++) {
-        array[i] = floor * 12 + i;
+      let start, year;
+      if (month < 24) (start = 0), (year = 2);
+      else if (month < 60) (start = 24), (year = 3);
+      else (start = 60), (year = 14);
+      for (let i = 0; i < year * 12; i++) {
+        if ((i + start) % 12 == 0)
+          array[i] = `${Math.floor((i + start) / 12)} سال`;
+        else array[i] = (i + start) % 12;
       }
       return array;
     },
     BMICalculator() {
       const array = [];
       const { month, bmi } = this.data;
-      let index = month - this.arrayOfMonth[0];
-      for (let i = 0; i < 12; i++) {
-        if (i == index) {
+      let year, start;
+      if (month < 24) (year = 2), (start = 0);
+      else if (month < 60) (year = 3), (start = 24);
+      else (year = 14), (start = 60);
+      for (let i = 0; i < year * 12; i++) {
+        if (i == month - start) {
           array[i] = bmi;
         } else {
           array[i] = null;
@@ -188,9 +209,13 @@ export default {
         labels: this.arrayOfMonth,
         datasets: [
           {
-            label: "Data Three",
+            label: "BMI",
             borderColor: "#3498db",
             backgroundColor: "#3498db",
+            pointStyle: "circle",
+            pointBorderWidth: 5,
+            pointHoverBorderWidth: 15,
+            fill: true,
             data: this.BMICalculator,
           },
           ...this.manageDatasets,
@@ -205,9 +230,9 @@ export default {
         datasets = [
           ...datasets,
           {
-            label: `label ${item.id}`,
             borderColor: item.color,
             backgroundColor: item.color,
+            file: true,
             data: table.map((num) => num[item.id]),
           },
         ];
@@ -219,15 +244,18 @@ export default {
 </script>
 
 <template>
-  <LineChartGenerator
-    :chart-options="chartOptions"
-    :chart-data="chartData"
-    :chart-id="chartId"
-    :dataset-id-key="datasetIdKey"
-    :plugins="plugins"
-    :css-classes="cssClasses"
-    :styles="styles"
-    :width="width"
-    :height="height"
-  />
+  <div>
+    <span>{{ title }}</span>
+    <LineChartGenerator
+      :chart-options="chartOptions"
+      :chart-data="chartData"
+      :chart-id="chartId"
+      :dataset-id-key="datasetIdKey"
+      :plugins="plugins"
+      :css-classes="cssClasses"
+      :styles="styles"
+      :width="width"
+      :height="height"
+    />
+  </div>
 </template>
