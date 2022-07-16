@@ -54,21 +54,23 @@ export default {
         </v-radio-group>
       </v-row>
       <v-text-field
-        class="mb-3"
+        class="dateField mb-3"
         v-model="weight"
         label="وزن"
         outlined
         suffix="کیلوگرم"
+        type="number"
         placeholder="وزن کودک خود را وارد کنید"
         hide-details
       />
 
       <v-text-field
-        class="mb-3"
+        class="dateField mb-3"
         v-model="height"
         label="قد"
         outlined
         suffix="سانتی‌متر"
+        type="number"
         placeholder="قد کودک خود را وارد کنید"
         hide-details
       />
@@ -82,7 +84,7 @@ export default {
       >
         <v-text-field
           v-model="day"
-          class="dateField"
+          class="dateField ltr"
           outlined
           type="number"
           label="روز"
@@ -91,7 +93,7 @@ export default {
         <!-- <v-icon class="px-2">mdi-slash-forward</v-icon> -->
         <v-text-field
           v-model="month"
-          class="dateField"
+          class="dateField ltr"
           outlined
           type="number"
           label="ماه"
@@ -100,7 +102,7 @@ export default {
         <!-- <v-icon class="px-2">mdi-slash-forward</v-icon> -->
         <v-text-field
           v-model="year"
-          class="dateField"
+          class="dateField ltr"
           outlined
           type="number"
           label="سال"
@@ -123,7 +125,6 @@ export default {
   border-radius: 1rem;
 }
 .dateField {
-  direction: ltr;
   &::v-deep() input::-webkit-outer-spin-button,
   &::v-deep() input::-webkit-inner-spin-button {
     -webkit-appearance: none;
