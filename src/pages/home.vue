@@ -28,11 +28,11 @@ export default {
 <template>
   <v-container>
     <v-sheet color="white" class="card mt-5">
-      <v-row>
+      <v-row justify="center">
         <v-col cols="12" lg="4">
           <FormBox :setData="(e) => (data = e)" />
         </v-col>
-        <v-col cols="12" lg="8">
+        <v-col cols="12" lg="8" v-show="data.bmi != null">
           <LineChartView :data="data" />
 
           <p class="mt-5" v-if="data.month > 0">
