@@ -77,6 +77,12 @@ export default {
       95 %
     </div>
     <div class="chart"></div>
+    <!-- <v-row no-gutters>
+      <div style="width: 5%; height: 56px; background-color: #7f8c8d"></div>
+      <div style="width: 75%; height: 56px; background-color: #27ae60"></div>
+      <div style="width: 15%; height: 56px; background-color: #f1c40f"></div>
+      <div style="width: 5%; height: 56px; background-color: #e74c3c"></div>
+    </v-row> -->
     <div
       v-if="calculate() > 0"
       class="degree"
@@ -122,13 +128,13 @@ export default {
   height: 56px;
   background-image: linear-gradient(
     to right,
-    #9a9a9a 0%,
-    #9a9a9a 5%,
-    #4ba42f 28%,
-    #4ba42f 75%,
-    #fdd504 90%,
-    #fdd504 94%,
-    #e02a2a
+    #7f8c8d 0%,
+    #7f8c8d 5%,
+    #27ae60 28%,
+    #27ae60 75%,
+    #f1c40f 90%,
+    #f1c40f 94%,
+    #e74c3c
   );
 }
 </style>
