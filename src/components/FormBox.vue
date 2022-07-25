@@ -4,13 +4,13 @@ export default {
   name: "FormBox",
   props: ["setData"],
   data: () => ({
-    weight: null,
-    height: null,
+    weight: 18,
+    height: 90,
     BMI: null,
     gender: "boy",
-    year: null,
-    month: null,
-    day: null,
+    year: 1397,
+    month: 10,
+    day: 15,
   }),
   computed: {},
   methods: {
@@ -43,7 +43,7 @@ export default {
   <div class="box">
     <v-img src="../assets/img.webp" class="image-rounded" />
     <form @submit.prevent="submit">
-      <v-row class="my-3" no-gutters align="center">
+      <v-row class="my-5" no-gutters align="center">
         <label>جنسیت</label>
         <v-spacer />
         <v-radio-group class="mt-0" v-model="gender" hide-details>
@@ -77,7 +77,7 @@ export default {
 
       <label>تاریخ تولد</label>
       <v-row
-        class="mb-3"
+        class="my-3"
         no-gutters
         align="center"
         style="flex-wrap: nowrap; gap: 10px"

@@ -84,7 +84,7 @@ export default {
       <div style="width: 5%; height: 56px; background-color: #e74c3c"></div>
     </v-row> -->
     <div
-      v-if="calculate() > 0"
+      v-if="calculate() >= 0"
       class="degree"
       :style="`left: calc(${this.calculate()}% - 25px); width: 50px`"
     >

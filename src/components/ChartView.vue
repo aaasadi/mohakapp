@@ -65,6 +65,10 @@ export default {
       type: Array,
       default: () => [],
     },
+    setTable: {
+      type: Function,
+      default: () => {},
+    },
   },
   data() {
     return {
@@ -77,10 +81,35 @@ export default {
         borderWidth: 2,
         pointStyle: "cross",
         pointBorderWidth: 0.01,
-        tension: 0.2,
+        tension: 0.4,
         responsive: true,
         maintainAspectRatio: false,
+        scales: {
+          yAxis: {
+            position: "left",
+            ticks: {
+              font: {
+                family: "IRANSans",
+              },
+              crossAlign: "far",
+            },
+            type: "linear",
+          },
+          xAxis: {
+            grid: {
+              drawTicks: false,
+            },
+            ticks: {
+              color: "#A3A3A3",
+              font: {
+                family: "IRANSans",
+              },
+              padding: 5,
+            },
+          },
+        },
       },
+      positions: [],
     };
   },
   computed: {
@@ -95,10 +124,10 @@ export default {
     },
     colors() {
       return {
-        black: "#636e72",
-        red: "#ff7675",
-        yellow: "#ffeaa7",
-        green: "#00cec9",
+        red: "#d06265",
+        orenge: "#ef9884",
+        yellow: "#ffd992",
+        green: "#8eb07e",
         primary: "#6c5ce7",
       };
     },
@@ -116,7 +145,7 @@ export default {
       }
       return array;
     },
-    BMICalculator() {
+    setBMIArray() {
       const array = [];
       const { month, bmi } = this.data;
       let year, start;
@@ -139,66 +168,66 @@ export default {
         case "boy":
           if (month < 24) {
             datasets = this.setDatasets(boyUnderTwoYear, [
-              { id: 3, color: this.colors.black },
-              { id: 4, color: this.colors.red },
+              { id: 3, color: this.colors.red },
+              { id: 4, color: this.colors.orenge },
               { id: 5, color: this.colors.yellow },
               { id: 6, color: this.colors.green },
               { id: 7, color: this.colors.yellow },
-              { id: 8, color: this.colors.red },
-              { id: 9, color: this.colors.black },
+              { id: 8, color: this.colors.orenge },
+              { id: 9, color: this.colors.red },
             ]);
           } else if (month < 60) {
             datasets = this.setDatasets(boyBetweenTwoAndFiveYear, [
-              { id: 3, color: this.colors.black },
-              { id: 4, color: this.colors.red },
+              { id: 3, color: this.colors.red },
+              { id: 4, color: this.colors.orenge },
               { id: 5, color: this.colors.yellow },
               { id: 6, color: this.colors.green },
               { id: 7, color: this.colors.yellow },
-              { id: 8, color: this.colors.red },
-              { id: 9, color: this.colors.black },
+              { id: 8, color: this.colors.orenge },
+              { id: 9, color: this.colors.red },
             ]);
           } else if (month < 229) {
             datasets = this.setDatasets(boyTopOfFiveYear, [
-              { id: 4, color: this.colors.black },
-              { id: 5, color: this.colors.red },
+              { id: 4, color: this.colors.red },
+              { id: 5, color: this.colors.orenge },
               { id: 6, color: this.colors.yellow },
               { id: 7, color: this.colors.green },
               { id: 8, color: this.colors.yellow },
-              { id: 9, color: this.colors.red },
-              { id: 10, color: this.colors.black },
+              { id: 9, color: this.colors.orenge },
+              { id: 10, color: this.colors.red },
             ]);
           }
           break;
         case "girl":
           if (month < 24) {
             datasets = this.setDatasets(girlUnderTwoYear, [
-              { id: 3, color: this.colors.black },
-              { id: 4, color: this.colors.red },
+              { id: 3, color: this.colors.red },
+              { id: 4, color: this.colors.orenge },
               { id: 5, color: this.colors.yellow },
               { id: 6, color: this.colors.green },
               { id: 7, color: this.colors.yellow },
-              { id: 8, color: this.colors.red },
-              { id: 9, color: this.colors.black },
+              { id: 8, color: this.colors.orenge },
+              { id: 9, color: this.colors.red },
             ]);
           } else if (month < 60) {
             datasets = this.setDatasets(girlBetweenTwoAndFiveYear, [
-              { id: 3, color: this.colors.black },
-              { id: 4, color: this.colors.red },
+              { id: 3, color: this.colors.red },
+              { id: 4, color: this.colors.orenge },
               { id: 5, color: this.colors.yellow },
               { id: 6, color: this.colors.green },
               { id: 7, color: this.colors.yellow },
-              { id: 8, color: this.colors.red },
-              { id: 9, color: this.colors.black },
+              { id: 8, color: this.colors.orenge },
+              { id: 9, color: this.colors.red },
             ]);
           } else if (month < 229) {
             datasets = this.setDatasets(girlTopOfFiveYear, [
-              { id: 4, color: this.colors.black },
-              { id: 5, color: this.colors.red },
+              { id: 4, color: this.colors.red },
+              { id: 5, color: this.colors.orenge },
               { id: 6, color: this.colors.yellow },
               { id: 7, color: this.colors.green },
               { id: 8, color: this.colors.yellow },
-              { id: 9, color: this.colors.red },
-              { id: 10, color: this.colors.black },
+              { id: 9, color: this.colors.orenge },
+              { id: 10, color: this.colors.red },
             ]);
           }
       }
@@ -215,11 +244,11 @@ export default {
             pointStyle: "circle",
             pointBorderWidth: 5,
             pointHoverBorderWidth: 15,
-            fill: true,
-            data: this.BMICalculator,
+            data: this.setBMIArray,
           },
           ...this.manageDatasets,
         ],
+        positions: [],
       };
     },
   },
@@ -232,30 +261,222 @@ export default {
           {
             borderColor: item.color,
             backgroundColor: item.color,
-            file: true,
             data: table.map((num) => num[item.id]),
           },
         ];
       });
       return datasets;
     },
+    createTable() {
+      let table = [];
+      const { gender, month } = this.data;
+      switch (gender) {
+        case "boy":
+          if (month < 24) {
+            table = boyUnderTwoYear[month];
+          } else if (month < 60) {
+            table = boyBetweenTwoAndFiveYear[month - 24];
+          } else if (month < 229) {
+            table = boyTopOfFiveYear[month - 60];
+          }
+          break;
+        case "girl":
+          if (month < 24) {
+            table = girlUnderTwoYear[month];
+          } else if (month < 60) {
+            table = girlBetweenTwoAndFiveYear[month - 24];
+          } else if (month < 229) {
+            table = girlTopOfFiveYear[month - 60];
+          }
+      }
+      let result = [];
+      if (month < 60) {
+        result = [
+          table[3],
+          table[4],
+          table[5],
+          table[6],
+          table[7],
+          table[8],
+          table[9],
+        ];
+      } else {
+        result = [
+          table[4],
+          table[5],
+          table[6],
+          table[7],
+          table[8],
+          table[9],
+          table[10],
+        ];
+      }
+      this.setTable(result);
+      return result;
+    },
+    setPositions() {
+      const { month, gender } = this.data;
+      const min = this.$refs.chart._data._chart.scales.yAxis.min;
+      const max = this.$refs.chart._data._chart.scales.yAxis.max;
+      const height = this.$refs.chart._data._chart.height;
+      let array = [];
+      switch (gender) {
+        case "boy":
+          if (month < 24) {
+            const index = 24;
+            array = [
+              boyUnderTwoYear[index][9],
+              boyUnderTwoYear[index][8],
+              boyUnderTwoYear[index][7],
+              boyUnderTwoYear[index][6],
+              boyUnderTwoYear[index][5],
+              boyUnderTwoYear[index][4],
+              boyUnderTwoYear[index][3],
+            ];
+          } else if (month < 60) {
+            const index = 36;
+            array = [
+              boyBetweenTwoAndFiveYear[index][9],
+              boyBetweenTwoAndFiveYear[index][8],
+              boyBetweenTwoAndFiveYear[index][7],
+              boyBetweenTwoAndFiveYear[index][6],
+              boyBetweenTwoAndFiveYear[index][5],
+              boyBetweenTwoAndFiveYear[index][4],
+              boyBetweenTwoAndFiveYear[index][3],
+            ];
+          } else {
+            const index = 167;
+            array = [
+              boyTopOfFiveYear[index][10],
+              boyTopOfFiveYear[index][9],
+              boyTopOfFiveYear[index][8],
+              boyTopOfFiveYear[index][7],
+              boyTopOfFiveYear[index][6],
+              boyTopOfFiveYear[index][5],
+              boyTopOfFiveYear[index][4],
+            ];
+          }
+          break;
+        case "girl":
+          if (month < 24) {
+            const index = 24;
+            array = [
+              girlUnderTwoYear[index][9],
+              girlUnderTwoYear[index][8],
+              girlUnderTwoYear[index][7],
+              girlUnderTwoYear[index][6],
+              girlUnderTwoYear[index][5],
+              girlUnderTwoYear[index][4],
+              girlUnderTwoYear[index][3],
+            ];
+          } else if (month < 60) {
+            const index = 36;
+            array = [
+              girlBetweenTwoAndFiveYear[index][9],
+              girlBetweenTwoAndFiveYear[index][8],
+              girlBetweenTwoAndFiveYear[index][7],
+              girlBetweenTwoAndFiveYear[index][6],
+              girlBetweenTwoAndFiveYear[index][5],
+              girlBetweenTwoAndFiveYear[index][4],
+              girlBetweenTwoAndFiveYear[index][3],
+            ];
+          } else {
+            const index = 167;
+            array = [
+              girlTopOfFiveYear[index][10],
+              girlTopOfFiveYear[index][9],
+              girlTopOfFiveYear[index][8],
+              girlTopOfFiveYear[index][7],
+              girlTopOfFiveYear[index][6],
+              girlTopOfFiveYear[index][5],
+              girlTopOfFiveYear[index][4],
+            ];
+          }
+          break;
+      }
+      array.forEach((num, index) => {
+        let top = (1 - [(num - min) / (max - min)]) * (height - 55);
+        this.$refs[`number${index}`].style.top = `${top}px`;
+      });
+    },
+  },
+  updated() {
+    this.createTable();
+    this.setPositions();
+  },
+  mounted() {
+    this.setPositions();
   },
 };
 </script>
 
 <template>
   <div>
-    <span>{{ title }}</span>
-    <LineChartGenerator
-      :chart-options="chartOptions"
-      :chart-data="chartData"
-      :chart-id="chartId"
-      :dataset-id-key="datasetIdKey"
-      :plugins="plugins"
-      :css-classes="cssClasses"
-      :styles="styles"
-      :width="width"
-      :height="height"
-    />
+    <h2 class="title">{{ title }}</h2>
+    <div class="box">
+      <v-fab-transition>
+        <div class="numbers">
+          <span class="number" ref="number0" :style="{ color: colors.red }"
+            >+3</span
+          >
+          <span class="number" ref="number1" :style="{ color: colors.orenge }"
+            >+2</span
+          >
+          <span class="number" ref="number2" :style="{ color: colors.yellow }"
+            >+1</span
+          >
+          <span class="number" ref="number3" :style="{ color: colors.green }"
+            >0</span
+          >
+          <span class="number" ref="number4" :style="{ color: colors.yellow }"
+            >-1</span
+          >
+          <span class="number" ref="number5" :style="{ color: colors.orenge }"
+            >-2</span
+          >
+          <span class="number" ref="number6" :style="{ color: colors.red }"
+            >-3</span
+          >
+        </div>
+      </v-fab-transition>
+      <LineChartGenerator
+        ref="chart"
+        class="chart"
+        :chart-options="chartOptions"
+        :chart-data="chartData"
+        :chart-id="chartId"
+        :dataset-id-key="datasetIdKey"
+        :plugins="plugins"
+        :css-classes="cssClasses"
+        :styles="styles"
+        :width="width"
+        :height="height"
+      />
+    </div>
   </div>
 </template>
+
+<style scoped>
+.title {
+  font-family: "IRANSans" !important;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.box {
+  position: relative;
+}
+.numbers {
+  position: absolute;
+  right: 1.2rem;
+}
+.number {
+  position: absolute;
+  text-align: left;
+  direction: ltr;
+  left: 0;
+}
+.chart {
+  padding-right: 1.2rem;
+}
+</style>
