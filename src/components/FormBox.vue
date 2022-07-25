@@ -4,13 +4,13 @@ export default {
   name: "FormBox",
   props: ["setData"],
   data: () => ({
-    weight: 18,
-    height: 90,
+    weight: null,
+    height: null,
     BMI: null,
     gender: "boy",
-    year: 1397,
-    month: 10,
-    day: 15,
+    year: null,
+    month: null,
+    day: null,
   }),
   computed: {},
   methods: {
