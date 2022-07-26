@@ -6,17 +6,7 @@
       <HomePage />
     </v-main>
 
-    <v-footer class="footer">
-      <v-row no-gutters class="px-5" justify="space-between">
-        <div class="text">تمامی حقوق برای دانشگاه علوم پزشکی محفوظ می‌باشد</div>
-        <div>
-          <span class="text">{{
-            new Date().toLocaleDateString("fa-IR", { year: "numeric" })
-          }}</span>
-          <v-icon left small>mdi-copyright</v-icon>
-        </div>
-      </v-row>
-    </v-footer>
+    <Footer />
   </v-app>
 </template>
 
@@ -24,12 +14,18 @@
 import "./assets/fonts/iransans/css/fontiran.css";
 import HomePage from "./pages/home.vue";
 import Appbar from "./components/Appbar.vue";
+import Footer from "./components/Footer.vue";
 
 export default {
   name: "App",
+  title: "test",
+  head: {
+    title: "test",
+  },
   components: {
     HomePage,
     Appbar,
+    Footer,
   },
 };
 </script>
@@ -41,12 +37,5 @@ export default {
 }
 .app {
   font-family: "IRANSans";
-}
-.footer {
-  margin-top: 2rem;
-  background-color: #eceff1;
-}
-.text {
-  font-size: 0.9em;
 }
 </style>

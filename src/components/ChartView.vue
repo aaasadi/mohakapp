@@ -394,9 +394,11 @@ export default {
           }
           break;
       }
+      console.log(min, max);
       array.forEach((num, index) => {
-        let top = (1 - [(num - min) / (max - min)]) * (height - 55);
-        this.$refs[`number${index}`].style.top = `${top}px`;
+        let ratio = (num - min) / (max - min);
+        let top = (1 - ratio) * (height - 35);
+        this.$refs[`number${index}`].style.top = `${top + 10}px`;
       });
     },
   },
@@ -414,31 +416,29 @@ export default {
   <div>
     <h2 class="title">{{ title }}</h2>
     <div class="box">
-      <v-fab-transition>
-        <div class="numbers">
-          <span class="number" ref="number0" :style="{ color: colors.red }"
-            >+3</span
-          >
-          <span class="number" ref="number1" :style="{ color: colors.orenge }"
-            >+2</span
-          >
-          <span class="number" ref="number2" :style="{ color: colors.yellow }"
-            >+1</span
-          >
-          <span class="number" ref="number3" :style="{ color: colors.green }"
-            >0</span
-          >
-          <span class="number" ref="number4" :style="{ color: colors.yellow }"
-            >-1</span
-          >
-          <span class="number" ref="number5" :style="{ color: colors.orenge }"
-            >-2</span
-          >
-          <span class="number" ref="number6" :style="{ color: colors.red }"
-            >-3</span
-          >
-        </div>
-      </v-fab-transition>
+      <div class="numbers" v-if="data.bmi">
+        <span class="number" ref="number0" :style="{ color: colors.red }"
+          >+3</span
+        >
+        <span class="number" ref="number1" :style="{ color: colors.orenge }"
+          >+2</span
+        >
+        <span class="number" ref="number2" :style="{ color: colors.yellow }"
+          >+1</span
+        >
+        <span class="number" ref="number3" :style="{ color: colors.green }"
+          >0</span
+        >
+        <span class="number" ref="number4" :style="{ color: colors.yellow }"
+          >-1</span
+        >
+        <span class="number" ref="number5" :style="{ color: colors.orenge }"
+          >-2</span
+        >
+        <span class="number" ref="number6" :style="{ color: colors.red }"
+          >-3</span
+        >
+      </div>
       <LineChartGenerator
         ref="chart"
         class="chart"
@@ -475,6 +475,7 @@ export default {
   text-align: left;
   direction: ltr;
   left: 0;
+  transform: translateY(-50%);
 }
 .chart {
   padding-right: 1.2rem;
