@@ -394,11 +394,10 @@ export default {
           }
           break;
       }
-      console.log(min, max);
       array.forEach((num, index) => {
-        let ratio = (num - min) / (max - min);
-        let top = (1 - ratio) * (height - 35);
-        this.$refs[`number${index}`].style.top = `${top + 10}px`;
+        let ratio = (max - num) / (max - min);
+        let top = ratio * (height - 52);
+        this.$refs[`number${index}`].style.top = `${top + 12}px`;
       });
     },
   },
